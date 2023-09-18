@@ -2,7 +2,7 @@ import React from 'react';
 import { PieChart, Pie, Cell, Legend } from 'recharts';
 import { MapContainer, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet';
 import L from 'leaflet';
-import LocationIcon from '../../pics/TreeIcon.jpg';
+import LocationIcon from '../../pics/TreeIcon.png';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend as BarLegend } from 'recharts';
 import 'leaflet/dist/leaflet.css';
 
@@ -50,7 +50,8 @@ const dataBar = [
 ];
 
 const CombinedChart = () => (
-  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection:'column' }}>
+    <div>
     <div style={{ flex: 1, marginRight: '20px' }}>
       <PieChart width={400} height={400}>
         <text x={155} y={200} fill="black" textAnchor="middle" dominantBaseline="middle" fontSize="11" fontWeight="bold">
@@ -106,6 +107,7 @@ const CombinedChart = () => (
         ))}
       </MapContainer>
     </div>
+  </div>
   </div>
 );
 
