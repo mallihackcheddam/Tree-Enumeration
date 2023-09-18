@@ -1,0 +1,21 @@
+.body1{
+    margin:4%;
+    height:70vh;
+    width:96vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left{
+    width:50vw;
+}
+
+.right{
+    width:50vw;
+}
+
+.right input{
+    margin-right:1%;
+    padding:1%;
+}
