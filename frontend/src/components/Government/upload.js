@@ -9,7 +9,7 @@ export default function upload() {
             <Govtnavbar />
             <div class="mb-3">
                 <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile"/>
+                <input class="form-control" type="file" id="formFile" accept='.jpeg, .png, .jpg'/>
             </div>
             <div className="results">
                 <h1>Results</h1>
