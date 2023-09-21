@@ -1,6 +1,7 @@
 
 import React from 'react'
 import {Link} from 'react-router-dom'
+import "./govtnavbar.css"
 
 export default function navbar() {
   return (
@@ -16,10 +17,10 @@ export default function navbar() {
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item upload1">
           <Link to="/government/upload"><a class="nav-link" href="/">Upload</a></Link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item analy1">
           <Link to="/government/analytics"><a class="nav-link" href="/">Analytics</a></Link>
         </li>
       </ul>
