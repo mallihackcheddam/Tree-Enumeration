@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './navbar'
 import './home.css'
+import {Link} from 'react-router-dom'
 
 export default function home() {
   return (
@@ -15,7 +16,9 @@ export default function home() {
           <input type="text" placeholder='Username'/>
           <input type="text" placeholder='Password'/>
           <p>Not a user?</p>
+          <Link to="/government/upload">
           <button>Submit</button>
+          </Link>
         </div>
     </div>
     </>
