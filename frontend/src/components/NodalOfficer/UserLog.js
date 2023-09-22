@@ -11,7 +11,7 @@ export default function UserLog() {
   const orig = 
     {
       "date": "Date",
-      "username": "Username",
+      "email": "Email",
       "organization": "Organization",
       "nodal_permit": "ID",
       "status":"Status",
@@ -21,21 +21,21 @@ export default function UserLog() {
   const obj = [
     {
       "date": "2023-09-23",
-      "username": "john_doe",
+      "email": "john_doe@gmail.com",
       "organization": "ABC Inc.",
       "nodal_permit": 12345,
       "status":"Pending"
     },
     {
       "date": "2023-09-22",
-      "username": "jane_smith",
+      "email": "jane_smith@email.com",
       "organization": "XYZ Corp.",
       "nodal_permit": 67890,
       "status":"Approved"
     },
     {
       "date": "2023-09-21",
-      "username": "bob_jenkins",
+      "email": "bob_jenkins@gmail.com",
       "organization": "123 Industries",
       "nodal_permit": 54321,
       "status":"Pending"

@@ -24,7 +24,7 @@ export default function Home() {
         role : role
       })
     }
-    fetch("http://127.0.0.1:8000/upload", requestOptions)
+    fetch("http://127.0.0.1:8000/login", requestOptions)
       .then((data) => data.json())
       .then((data) => console.log(data))
   }
@@ -58,7 +58,10 @@ export default function Home() {
               navigate("/user/home");
               navigate("/useragency/upload",email);
             }
-            else if(role==="NodalOfficer") navigate("/nodal/home");
+            else if(role==="NodalOfficer"){
+              navigate("/nodal/home");
+              navigate("/nodal/LogComp",email);
+            }
             else if(role==="GovernmentOfficial") navigate("/government/home");
           }} className='btn btn-primary'>Submit</button>
         </div>
