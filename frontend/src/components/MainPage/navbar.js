@@ -20,7 +20,7 @@ export default function Navbar() {
               
               
                 <li class="nav-item c2">
-                <Link to="/register"><a class="nav-link" href="/">Register</a></Link>
+                <Link to="/userregister"><a class="nav-link" href="/">UserAgency</a></Link>
                 </li>
               
             </ul>

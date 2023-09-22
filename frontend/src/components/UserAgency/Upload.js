@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import Govtnavbar from './govtnavbar'
+import UserNavbar from './UserNavbar'
 import './upload.css'
-
+import MapLocate from '../Government/MapLocate'
 
 
 function Upload() {
 
     const [file, setfile] = useState(null);
+    const [location, setlocation] =useState("");
 
     const handleSubmit = () =>{
 
@@ -28,17 +29,19 @@ function Upload() {
 
     return (
         <div className="govtupload">
-            <Govtnavbar />
+            <UserNavbar />
             <div class="mb-3">
-                <label for="formFile" className="form-label">Default file input example</label>
+                <label for="formFile" className="form-label">Upload Image</label>
                 <input 
                 onChange={(e)=>{
                     setfile(e.target.files[0]);
                 }}  
                 className="form-control" type="file" id="formFile" accept='.jpeg, .png, .jpg'/>
+                <div>Select Location : {location}</div>
+                <MapLocate setlocation={setlocation}/>
                 <button
                 onClick={()=>{handleSubmit()}}
-                >
+                className='btn btn-primary'>
                     Submit
                 </button>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react'
-import Analytics from './analytics'
-import Govtnavbar from './govtnavbar'
+import Analytics from './Analytics'
+import Govtnavbar from './Govtnavbar'
 
 export default function AnalyticsMain() {
   return (
