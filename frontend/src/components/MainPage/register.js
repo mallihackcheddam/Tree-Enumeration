@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from './navbar'
+import Navbar from './Navbar'
 import './register.css'
 
-export default function register() {
+export default function Register() {
   return (
     <>
     <Navbar/>

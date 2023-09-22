@@ -1,15 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Govtnavbar from './govtnavbar'
 import './upload.css'
-import MapLocate from './mapLocate'
 
-export default function upload() {
+
+
+function Upload() {
+
+    const [file, setfile] = useState(null);
+
+    const handleSubmit = () =>{
+
+        const formData = new FormData();
+        
+        formData.append("file", file, file.name)
+
+        const requestOptions = {
+
+            method:"post",
+            body:formData,
+        }
+        fetch("http://127.0.0.1:8000/upload", requestOptions)
+        .then((data)=>data.json())
+        .then((data)=>console.log(data))
+
+    }
+
+
     return (
-        <div classname="govtupload">
+        <div className="govtupload">
             <Govtnavbar />
             <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile" accept='.jpeg, .png, .jpg'/>
+                <label for="formFile" className="form-label">Default file input example</label>
+                <input 
+                onChange={(e)=>{
+                    setfile(e.target.files[0]);
+                }}  
+                className="form-control" type="file" id="formFile" accept='.jpeg, .png, .jpg'/>
+                <button
+                onClick={()=>{handleSubmit()}}
+                >
+                    Submit
+                </button>
             </div>
             <div className="results">
                 <h1>Results</h1>
@@ -17,3 +48,5 @@ export default function upload() {
         </div>
     )
 }
+
+export default Upload;

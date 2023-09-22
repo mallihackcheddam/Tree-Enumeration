@@ -1,10 +1,10 @@
 import logo from './logo.svg';
-import Home from './components/MainPage/home'
-import Navbar from './components/MainPage/navbar'
-import Register from './components/MainPage/register';
-import Upload from './components/Government/upload';
+import Home from './components/MainPage/Home'
+import Navbar from './components/MainPage/Navbar'
+import Register from './components/MainPage/Register';
+import Upload from './components/Government/Upload';
 import Analytics from './components/Government/analytics'
-import AnalyticsMain from './components/Government/analyticsMain'
+import AnalyticsMain from './components/Government/AnalyticsMain'
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './navbar.css'
 
-export default function navbar() {
+export default function Navbar() {
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
