@@ -7,19 +7,15 @@ export default function LogComp({user}) {
 
     const [color,setColor]=useState("rgb(209, 209, 248)");
     const [status,setStatus]=useState(user.status);
-    const [nodalEmail, setNodalEmail] = useState("");
-    const [userEmail, setUserEmail] = useState("");
     const loc=useLocation();
-    setNodalEmail(loc.email);
-    setUserEmail(user.email);
 
     useEffect(()=>{
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          nodal_email : nodalEmail,
-          user_email : userEmail,
+          nodal_email : loc.email,
+          user_email : user.email,
           status : status
         })
       }

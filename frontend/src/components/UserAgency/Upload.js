@@ -9,9 +9,7 @@ function Upload() {
 
     const [file, setfile] = useState(null);
     const [location, setlocation] =useState("");
-    const [email,setEmail] =useState("");
-    const loc=useLocation();
-    setEmail(loc.email);
+    //user email is in loc.email
 
     const handleSubmit = () =>{
 

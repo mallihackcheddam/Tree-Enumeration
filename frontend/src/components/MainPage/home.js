@@ -56,11 +56,11 @@ export default function Home() {
           <button onClick={(e) => { 
             if(role==="UserAgency"){
               navigate("/user/home");
-              navigate("/useragency/upload",email);
+              // navigate("/useragency/upload",email);
             }
             else if(role==="NodalOfficer"){
               navigate("/nodal/home");
-              navigate("/nodal/LogComp",email);
+              // navigate("/nodal/usercheck",email);
             }
             else if(role==="GovernmentOfficial") navigate("/government/home");
           }} className='btn btn-primary'>Submit</button>
