@@ -14,10 +14,10 @@ export default function navbar() {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item c1">
-          <Link to="/government/home"><a class="nav-link active" aria-current="page" href="/">Home</a></Link>
+          <Link to="/nodal/home"><a class="nav-link active" aria-current="page" href="/">Home</a></Link>
         </li>
         <li class="nav-item c1">
-          <Link to="/government/analytics"><a class="nav-link" href="/">UserCheck</a></Link>
+          <Link to="/nodal/usercheck"><a class="nav-link" href="/">UserCheck</a></Link>
         </li>
         <li class="nav-item c1">
           <Link to="/"><a class="nav-link" href="/">Logout</a></Link>

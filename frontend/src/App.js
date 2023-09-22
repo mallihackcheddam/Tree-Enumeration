@@ -27,9 +27,11 @@ function App() {
           <Route path="/user/upload" element={<Upload/>} />
           <Route path="/government/analytics" element={<AnalyticsMain/>} />
           <Route path="/government/home" element={<GovtHome/>} />
+          <Route path="/government/usersessions" element={<UserSessions/>} />
           <Route path="/user/home" element={<UserHome/>} />
           <Route path="/nodal/home" element={<NodalHome/>} />
           <Route path="/user/analytics" element={<UserAnalytics/>} />          
+          <Route path="/nodal/usercheck" element={<UserLog/>} />
         </Routes>
       </BrowserRouter>
     </div>

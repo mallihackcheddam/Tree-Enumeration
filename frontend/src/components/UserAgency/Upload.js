@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import UserNavbar from './UserNavbar'
 import './upload.css'
 import MapLocate from '../Government/MapLocate'
+import { useLocation } from 'react-router-dom'
 
 
 function Upload() {
 
     const [file, setfile] = useState(null);
     const [location, setlocation] =useState("");
+    const [email,setEmail] =useState("");
+    const loc=useLocation();
+    setEmail(loc.email);
 
     const handleSubmit = () =>{
 

@@ -1,0 +1,13 @@
+.listbro{
+    width:60vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:0.5%;
+    background-color: rgb(209, 209, 248);
+    border-radius: 0.4rem;
+}
+
+.listbro p{
+    margin:2%;
+}

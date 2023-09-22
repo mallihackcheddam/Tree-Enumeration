@@ -1,12 +1,12 @@
 import React from 'react'
-import UserAnalytics from './UserAnalytics'
+import Analytics from './Analytics'
 import UserNavbar from './UserNavbar'
 
 export default function AnalyticsMain() {
   return (
     <div>
         <UserNavbar/>
-        <UserAnalytics/>
+        <Analytics/>
     </div>
   )
 }

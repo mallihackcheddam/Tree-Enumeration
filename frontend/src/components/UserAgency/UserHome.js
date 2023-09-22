@@ -5,11 +5,12 @@ export default function GovtHome() {
   return (
     <div>
         <UserNavbar/>
-    <div>
-        <h1>User Agency Official Page</h1>
+    <div className='govhome'>
+    <h1>User Agency Official Page</h1>
+        <div className='govbuttons'>
         <button>Upload</button>
         <button>Analytics</button>
-        <button>Logout</button>
+        </div>
     </div>
     </div>
   )
