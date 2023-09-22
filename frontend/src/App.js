@@ -1,23 +1,29 @@
 import logo from './logo.svg';
+import Home from './components/MainPage/Home'
+import Navbar from './components/MainPage/Navbar'
+import Register from './components/MainPage/Register';
+import Upload from './components/Government/Upload';
+import Analytics from './components/Government/analytics'
+import AnalyticsMain from './components/Government/AnalyticsMain'
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Home/> */}
+      {/* <Register/> */}
+      {/* <Upload/> */}
+      {/* <AnalyticsMain/>   */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/government/upload" element={<Upload/>} />
+          <Route path="/government/analytics" element={<AnalyticsMain/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
