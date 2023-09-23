@@ -18,9 +18,7 @@ function Upload() {
     formData.append("location", "Alwal");
     formData.append("email", "abc@gmail.com");
 
-    axios
-      .post("http://127.0.0.1:8000/upload", formData)
-      .then((data) => console.log(data));
+    axios.post("/upload", formData).then((data) => console.log(data));
 
     // const requestOptions = {
 

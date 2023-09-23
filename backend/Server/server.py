@@ -40,20 +40,20 @@ async def predict_species(image):
     return arr
 
 app = FastAPI()
-origins = [
-    # "http://localhost.tiangolo.com",
-    # "https://localhost.tiangolo.com",
-    # "http://localhost",
-    "http://localhost:3000",
-]
+# origins = [
+#     # "http://localhost.tiangolo.com",
+#     # "https://localhost.tiangolo.com",
+#     # "http://localhost",
+#     "http://localhost:3000",
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 class ImageBody(BaseModel):
     file: bytes
@@ -112,23 +112,29 @@ async def agency(agent: UserAgent):
         return "Failed"
 
 
-@app.get("/login")
-async def login(login_body: Login, response : Response):
-    collection_name = db[login_body.role]
+@app.post("/login")
+async def login(login_body: Login):
+    
+    print(login_body)
+    collection_name = db["UserAgency"]
 
+    # print(login_body)
     body = {
         "email" : login_body.email,
         "password" : login_body.password,
     }
 
     result = collection_name.find(body)
-    
+    l = []
+    for i in result:
+        l.append(i.email)
+
     try:
-        response.status_code = 200
-        return str(result[0])
+
+        return str(l[0])
 
     except:
-        response.status_code = 404
+        print("Failed")
         return "Failed"
 
 @app.post("/upload")
