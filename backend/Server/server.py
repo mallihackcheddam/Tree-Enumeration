@@ -20,7 +20,7 @@ count_model = YOLO('..\Models\All_Trees\model1.pt')
 coconut_model = YOLO('..\Models\Coconut\model1.pt')
 
 def predict_count(image):
-    results = count_model.predict(source=image)
+    results = count_model.predict(source=image,show=True)
     output={}
     output['total_count']=results[0].boxes.shape[0]
     output['species']=predict_species(image)
@@ -30,7 +30,7 @@ def predict_count(image):
 
 def predict_species(image):
     arr=[]
-    results = coconut_model.predict(source=image)
+    results = coconut_model.predict(source=image, show=True)
     dict={}
     dict['name']=results[0].names[0]
     dict['count']=results[0].boxes.shape[0]
