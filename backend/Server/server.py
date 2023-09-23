@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from datetime import datetime
-
+from ultralyrics import YOLO
 
 uri = "mongodb+srv://mallihackcheddam:SIH2023@hackathon.in9arqo.mongodb.net/?retryWrites=true&w=majority"
 
@@ -16,6 +16,27 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client.hackathon
 
 
+count_model = YOLO('..\Models\All_Trees\model1.pt')
+coconut_model = YOLO('..\Models\Coconut\model1.pt')
+
+def predict_count(image):
+    results = count_model.predict(source=image)
+    output={}
+    output['total_count']=results[0].boxes.shape[0]
+    output['species']=predict_species(image)
+
+    print(output)
+
+def predict_species(image):
+    arr=[]
+    results = coconut_model.predict(source=image)
+    dict={}
+    dict['name']=results[0].names[0]
+    dict['count']=results[0].boxes.shape[0]
+
+    arr.append(dict)
+
+    return arr
 
 app = FastAPI()
 # origins = [
@@ -116,6 +137,8 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
     image = Image.open(io.BytesIO(file))
     image.show()
 
+    predict_count(image)
+
     user = collection_name.find({"email":email})
     
     l = []
@@ -147,7 +170,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
 
     print(user)
 
-    collection_name.update_one({"email":email}, {"$set":user})
+    # collection_name.update_one({"email":email}, {"$set":user})
 
     return str(file)
 
