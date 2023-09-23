@@ -19,7 +19,7 @@ db = client.hackathon
 count_model = YOLO('..\Models\All_Trees\model1.pt')
 coconut_model = YOLO('..\Models\Coconut\model1.pt')
 
-async def predict_count(image):
+def predict_count(image):
     results = count_model.predict(source=image,show=True)
     output={}
     output['total_count']=results[0].boxes.shape[0]
@@ -28,7 +28,7 @@ async def predict_count(image):
     print(output)
     return output
 
-async def predict_species(image):
+def predict_species(image):
     arr=[]
     results = coconut_model.predict(source=image)
     dict={}
@@ -173,7 +173,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
 
     # collection_name.update_one({"email":email}, {"$set":user})
 
-    return str(file)
+    return res
 
 @app.post("/nodal_status")
 async def status(status_body: Status_cls):
