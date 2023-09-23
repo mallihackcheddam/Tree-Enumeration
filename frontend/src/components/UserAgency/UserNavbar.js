@@ -13,7 +13,7 @@ export default function navbar() {
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item c1">
           <Link to="/user/home"><a class="nav-link active" aria-current="page" href="/">Home</a></Link>
         </li>
         <li class="nav-item c1">
