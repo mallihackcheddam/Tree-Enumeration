@@ -5,11 +5,11 @@ import LocationIcon from '../../pics/LocationIcon.png';
 import L from 'leaflet';
 const customIcon = L.icon({
   iconUrl: LocationIcon,
-  iconSize: [50, 50],
+  iconSize: [30, 30],
   iconAnchor: [12.5, 12.5],
 });
 
-const Map = () => {
+const Map = ({setlocation}) => {
   const [clickedLocation, setClickedLocation] = useState(null);
 
   const handleMapClick = async (e) => {
@@ -21,6 +21,7 @@ const Map = () => {
         const data = await response.json();
         const address = data.display_name;
         setClickedLocation({ lat, lng, address });
+        setlocation(address);
       } else {
         throw new Error('Unable to fetch address data');
       }

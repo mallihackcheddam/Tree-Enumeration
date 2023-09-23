@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import Govtnavbar from "./Govtnavbar";
 import "./upload.css";
 import axios from "axios";
+import UserNavbar from "./UserNavbar";
+import "./upload.css";
+import MapLocate from "../Government/MapLocate";
+import { useLocation } from "react-router-dom";
 
 function Upload() {
   const [file, setfile] = useState(null);
+  const [location, setlocation] = useState("");
 
   const handleSubmit = () => {
     const formData = new FormData();
+    //user email is in loc.email
 
     formData.append("file", file, file.name);
     formData.append("location", "Alwal");
@@ -16,14 +21,23 @@ function Upload() {
     axios
       .post("http://127.0.0.1:8000/upload", formData)
       .then((data) => console.log(data));
+
+    // const requestOptions = {
+
+    //     method:"post",
+    //     body:formData,
+    // }
+    // fetch("http://127.0.0.1:8000/upload", requestOptions)
+    // .then((data)=>data.json())
+    // .then((data)=>console.log(data))
   };
 
   return (
     <div className="govtupload">
-      <Govtnavbar />
-      <div className="mb-3">
-        <label htmlFor="formFile" className="form-label">
-          Default file input example
+      <UserNavbar />
+      <div class="mb-3">
+        <label for="formFile" className="form-label">
+          Upload Image
         </label>
         <input
           onChange={(e) => {
@@ -34,10 +48,13 @@ function Upload() {
           id="formFile"
           accept=".jpeg, .png, .jpg"
         />
+        <div>Select Location : {location}</div>
+        <MapLocate setlocation={setlocation} />
         <button
           onClick={() => {
             handleSubmit();
           }}
+          className="btn btn-primary"
         >
           Submit
         </button>
@@ -48,5 +65,4 @@ function Upload() {
     </div>
   );
 }
-
 export default Upload;

@@ -19,7 +19,7 @@ db = client.hackathon
 count_model = YOLO('..\Models\All_Trees\model1.pt')
 coconut_model = YOLO('..\Models\Coconut\model1.pt')
 
-def predict_count(image):
+async def predict_count(image):
     results = count_model.predict(source=image,show=True)
     output={}
     output['total_count']=results[0].boxes.shape[0]
@@ -28,9 +28,9 @@ def predict_count(image):
     print(output)
     return output
 
-def predict_species(image):
+async def predict_species(image):
     arr=[]
-    results = coconut_model.predict(source=image, show=True)
+    results = coconut_model.predict(source=image)
     dict={}
     dict['name']=results[0].names[0]
     dict['count']=results[0].boxes.shape[0]
@@ -40,20 +40,20 @@ def predict_species(image):
     return arr
 
 app = FastAPI()
-# origins = [
-#     # "http://localhost.tiangolo.com",
-#     # "https://localhost.tiangolo.com",
-#     # "http://localhost",
-#     "http://localhost:3000",
-# ]
+origins = [
+    # "http://localhost.tiangolo.com",
+    # "https://localhost.tiangolo.com",
+    # "http://localhost",
+    "http://localhost:3000",
+]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ImageBody(BaseModel):
     file: bytes
@@ -140,6 +140,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
 
     res = predict_count(image)
 
+    # user = []
     user = collection_name.find({"email":email})
     
     l = []
