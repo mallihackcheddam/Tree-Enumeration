@@ -3,7 +3,7 @@ import Home from './components/MainPage/Home'
 import Navbar from './components/MainPage/Navbar'
 import Register from './components/MainPage/Register';
 import Upload from './components/Government/Upload';
-import Analytics from './components/Government/analytics'
+import Analytics from './components/Government/Analytics'
 import AnalyticsMain from './components/Government/AnalyticsMain'
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";

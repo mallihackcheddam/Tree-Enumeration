@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Govtnavbar from "./govtnavbar";
+import Govtnavbar from "./Govtnavbar";
 import "./upload.css";
 import axios from "axios";
 

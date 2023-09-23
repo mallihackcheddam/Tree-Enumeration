@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from datetime import datetime
-from ultralyrics import YOLO
+from ultralytics import YOLO
 
 uri = "mongodb+srv://mallihackcheddam:SIH2023@hackathon.in9arqo.mongodb.net/?retryWrites=true&w=majority"
 
@@ -26,6 +26,7 @@ def predict_count(image):
     output['species']=predict_species(image)
 
     print(output)
+    return output
 
 def predict_species(image):
     arr=[]
@@ -135,9 +136,9 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
     
     collection_name = db["UserAgency"]
     image = Image.open(io.BytesIO(file))
-    image.show()
+    # image.show()
 
-    predict_count(image)
+    res = predict_count(image)
 
     user = collection_name.find({"email":email})
     
@@ -148,14 +149,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
     user = l[0]
     session = l[0]["sessions"]
 
-    answer = {
-        "count" : 0,
-        "species" : 
-        {
-            "name" : "Pine",
-            "count" : 0,
-        }
-    }
+    answer = res
     session.append({
 
         
