@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import './LogComp.css'
-import NodalDropdown from './NodalDropdown'
+import '../NodalOfficer/LogComp.css'
 import { useLocation } from 'react-router-dom';
 
 export default function LogComp({user}) {
@@ -24,14 +23,14 @@ export default function LogComp({user}) {
     //     .then((data) => console.log(data))
     // })
 
-  if(user.edhokati==="bold"){
+  if(user.image==="Image"){
     return (
     <div className='listbro' style={{backgroundColor:"#CACBCE"}}>
         <p><strong>{user.date}</strong></p>
-        <p><strong>{user.email}</strong></p>
         <p><strong>{user.organization}</strong></p>
-        <p><strong>{user.nodal_permit}</strong></p>
-        <p><strong>{user.status}</strong></p>
+        <p><strong>{user.noofspecies}</strong></p>
+        <p><strong>{user.nooftrees}</strong></p>
+        <p><strong>{user.image}</strong></p>
     </div>
   )}
   else{
@@ -40,10 +39,10 @@ export default function LogComp({user}) {
         status==="Approved"?"#CBEFB6":
           status==="Rejected"?"#F8CCC9":"rgb(209, 209, 248)",transition:"0.8s ease"}}>
             <p>{user.date}</p>
-            <p>{user.email}</p>
             <p>{user.organization}</p>
-            <p>{user.nodal_permit}</p>
-            <NodalDropdown status={status} setStatus={setStatus}/>
+            <p>{user.noofspecies}</p>
+            <p>{user.nooftrees}</p>
+            <button className='btn btn-primary'>View</button>
         </div>
       )
   }

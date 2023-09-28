@@ -3,52 +3,72 @@ import UserNavbar from './UserNavbar'
 import './upload.css'
 import MapLocate from '../Government/MapLocate'
 import { useLocation } from 'react-router-dom'
+import upload from '../../pics/upload.png'
+import Log3Comp from './Log3Comp'
 
 
 function Upload() {
 
     const [file, setfile] = useState(null);
-    const [location, setlocation] =useState("");
+    const [location, setlocation] = useState("");
+    const [img, setImg] = useState({ upload });
+    const [count,setCount]= useState(0);
     //user email is in loc.email
 
-    const handleSubmit = () =>{
+    const databro = {'total_count': 76, 'species': [{'name': 'Coconut', 'count': 100}]};
+
+    const handleSubmit = () => {
 
         const formData = new FormData();
-        
-        formData.append("file", file, file.name)
+        setCount(databro.total_count);
 
-        const requestOptions = {
+        // formData.append("file", file, file.name)
 
-            method:"post",
-            body:formData,
-        }
-        fetch("http://127.0.0.1:8000/upload", requestOptions)
-        .then((data)=>data.json())
-        .then((data)=>console.log(data))
+        // const requestOptions = {
+
+        //     method: "post",
+        //     body: formData,
+        // }
+        // fetch("http://127.0.0.1:8000/upload", requestOptions)
+        //     .then((data) => data.json())
+        //     .then((data) => console.log(data))
 
     }
 
+    function resultChange(){
+        
+    }
 
     return (
         <div className="govtupload">
             <UserNavbar />
-            <div class="mb-3">
-                <label for="formFile" className="form-label">Upload Image</label>
-                <input 
-                onChange={(e)=>{
-                    setfile(e.target.files[0]);
-                }}  
-                className="form-control" type="file" id="formFile" accept='.jpeg, .png, .jpg'/>
-                <div>Select Location : {location}</div>
-                <MapLocate setlocation={setlocation}/>
+            <div className="totall">
+                <div className="mb-3 totalmap">
+                    <div className="leftmap">
+                        <input
+                            onChange={(e) => {
+                                setfile(e.target.files[0]);
+                                setImg(e.target.files[0]);
+                            }}
+                            className="" type="file" id="formFile" accept='.jpeg, .png, .jpg' />
+                    </div>
+
+                    <div className="rightmap">
+                        <div>Select Location : {location}</div>
+                        <MapLocate setlocation={setlocation} />
+
+                    </div>
+
+                </div>
                 <button
-                onClick={()=>{handleSubmit()}}
-                className='btn btn-primary'>
+                    onClick={() => { handleSubmit() }}
+                    className='btn btn-primary'>
                     Submit
                 </button>
-            </div>
-            <div className="results">
-                <h1>Results</h1>
+                <div className="results">
+                    <h1>Results</h1>
+                    <p>Total count : {count}</p>
+                </div>
             </div>
         </div>
     )

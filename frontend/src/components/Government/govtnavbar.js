@@ -21,6 +21,9 @@ export default function navbar() {
           <Link to="/government/analytics"><a class="nav-link" href="/">Analytics</a></Link>
         </li>
         <li class="nav-item c1">
+          <Link to="/government/usersessions"><a class="nav-link" href="/">Sessions</a></Link>
+        </li>
+        <li class="nav-item c1">
           <Link to="/"><a class="nav-link" href="/">Logout</a></Link>
         </li>
       </ul>
