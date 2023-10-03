@@ -7,16 +7,23 @@ import MapLocate from "../Government/MapLocate";
 import { useLocation } from "react-router-dom";
 
 function Upload() {
+
+  const {state}  = useLocation();
+  
+  const {email} = state;
+  console.log(email);
+
   const [file, setfile] = useState(null);
   const [location, setlocation] = useState("");
 
+  console.log(location);
   const handleSubmit = () => {
     const formData = new FormData();
     //user email is in loc.email
 
     formData.append("file", file, file.name);
-    formData.append("location", "Alwal");
-    formData.append("email", "abc@gmail.com");
+    formData.append("location", location);
+    formData.append("email", email);
 
     axios.post("/upload", formData).then((data) => console.log(data));
 

@@ -39,8 +39,8 @@ export default function UserLog() {
       "organization": "123 Industries",
       "nodal_permit": 54321,
       "status":"Pending"
-    }
-  ]
+    }
+]
 
   return (
     <div>

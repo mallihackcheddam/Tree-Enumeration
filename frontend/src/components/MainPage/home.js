@@ -15,25 +15,42 @@ export default function Home() {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     email: email,
-    //     password: password,
-    //     role: role,
-    //   }),
-    // };
 
+    if(role==="")
+    {
+      alert("Please select the role");
+      return;
+    }
     const requestOptions = {
       email: email,
       password: password,
       role: role,
     };
     axios
-      .post("http://127.0.0.1:8000/login", requestOptions)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .post("/login", requestOptions)
+      .then(() => {
+        if (role === "UserAgency") {
+          navigate("/user/home", {
+            state: {
+              email : email,
+            },
+          });
+          // navigate("/useragency/upload",email);
+        }
+        else if (role === "NodalOfficer") {
+          navigate("/nodal/home");
+          // navigate("/nodal/usercheck",email);
+        }
+        else if (role === "GovernmentOfficial")
+        { 
+          navigate("/government/home");
+        }
+      })
+      .catch(() => {
+
+        alert("Authentication failed");
+
+      });
   };
   return (
     <>
@@ -75,15 +92,8 @@ export default function Home() {
           <button
             onClick={(e) => {
               handleSubmit();
-              // if (role === "UserAgency") {
-              //   navigate("/user/home");
-              //   // navigate("/useragency/upload",email);
-              // } else if (role === "NodalOfficer") {
-              //   navigate("/nodal/home");
-              //   // navigate("/nodal/usercheck",email);
-              // } else if (role === "GovernmentOfficial")
-              //   navigate("/government/home");
-            }}
+            }
+            }
             className="btn btn-primary"
           >
             Submit

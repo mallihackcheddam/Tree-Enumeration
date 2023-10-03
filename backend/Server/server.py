@@ -30,7 +30,7 @@ def predict_count(image):
 
 def predict_species(image):
     arr=[]
-    results = coconut_model.predict(source=image)
+    results = coconut_model.predict(source=image, show=True)
     dict={}
     dict['name']=results[0].names[0]
     dict['count']=results[0].boxes.shape[0]
@@ -40,20 +40,20 @@ def predict_species(image):
     return arr
 
 app = FastAPI()
-# origins = [
-#     # "http://localhost.tiangolo.com",
-#     # "https://localhost.tiangolo.com",
-#     # "http://localhost",
-#     "http://localhost:3000",
-# ]
+origins = [
+    # "http://localhost.tiangolo.com",
+    # "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:3001",
+]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ImageBody(BaseModel):
     file: bytes
@@ -73,7 +73,7 @@ class Login(BaseModel):
     email: str
     password: str
     role: str
-    organization: str
+    # organization: str
     # sessions:list
 
 class Upload(BaseModel):
@@ -90,7 +90,7 @@ async def root():
     return "Mallihackcheddam"
 
 @app.post("/useragency_signup")
-async def agency(agent: UserAgent):
+async def agency(agent: UserAgent, response : Response):
 
     try:
 
@@ -107,21 +107,24 @@ async def agency(agent: UserAgent):
         }
         result = collection_name.insert_one(useragent)
         
+        response.status_code = 200
         return "Success"
 
     except:
+        
+        response.status_code = 401
         return "Failed"
 
 
 @app.post("/login")
-async def login(login_body: Login):
+async def login(login_body: Login, response : Response):
     
     print(login_body)
     collection_name = db["UserAgency"]
 
     # print(login_body)
     body = {
-        "organization" : login_body.organization,
+        # "organization" : login_body.organization,
         "email" : login_body.email,
         "password" : login_body.password,
     }
@@ -133,11 +136,11 @@ async def login(login_body: Login):
         l.append(i["email"])
 
     try:
-
+        response.status_code = 200
         return str(l[0])
 
     except:
-        
+        response.status_code = 401
         print("Failed")
         return "Failed"
 
@@ -175,7 +178,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
 
     print(user)
 
-    # collection_name.update_one({"email":email}, {"$set":user})
+    collection_name.update_one({"email":email}, {"$set":user})
 
     return res
 
