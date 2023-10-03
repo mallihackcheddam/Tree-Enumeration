@@ -73,6 +73,7 @@ class Login(BaseModel):
     email: str
     password: str
     role: str
+    organization: str
     # sessions:list
 
 class Upload(BaseModel):
@@ -120,6 +121,7 @@ async def login(login_body: Login):
 
     # print(login_body)
     body = {
+        "organization" : login_body.organization,
         "email" : login_body.email,
         "password" : login_body.password,
     }
@@ -127,13 +129,15 @@ async def login(login_body: Login):
     result = collection_name.find(body)
     l = []
     for i in result:
-        l.append(i.email)
+        # print(i)
+        l.append(i["email"])
 
     try:
 
         return str(l[0])
 
     except:
+        
         print("Failed")
         return "Failed"
 
@@ -196,7 +200,7 @@ async def status(status_body: Status_cls):
     l_nodal[0]['status'] = status_body.status + "-" + status_body.nodal_name
     print(l_nodal[0])
 
-    collection_name.update_one({"email":email}, {"$set":l_nodal[0]})
+    collection_name.update_one({"email":status_body.user_email}, {"$set":l_nodal[0]})
 
     return "Success"
 
