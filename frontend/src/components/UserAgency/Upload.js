@@ -11,16 +11,17 @@ function Upload() {
   const {state}  = useLocation();
   
   const {email} = state;
-  console.log(email);
+  // console.log(email);
 
   const [file, setfile] = useState(null);
   const [location, setlocation] = useState("");
 
-  console.log(location);
+  // console.log(location);
   const handleSubmit = () => {
     const formData = new FormData();
     //user email is in loc.email
-
+  
+    if(location==="")alert("Please choose a location");
     formData.append("file", file, file.name);
     formData.append("location", location);
     formData.append("email", email);

@@ -3,31 +3,20 @@ import "./LogComp.css";
 import NodalDropdown from "./NodalDropdown";
 import { useLocation } from "react-router-dom";
 
-export default function LogComp({ user }) {
+export default function LogComp({ user, wait, setwait }) {
+
   const [color, setColor] = useState("rgb(209, 209, 248)");
   const [status, setStatus] = useState(user.status);
-  const loc = useLocation();
 
-  useEffect(() => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nodal_email: loc.email,
-        user_email: user.email,
-        status: status,
-      }),
-    };
-    fetch("/upload", requestOptions)
-      .then((data) => data.json())
-      .then((data) => console.log(data));
-  });
+  const loc = useLocation(); 
+
+
 
   if (user.edhokati === "bold") {
     return (
       <div className="listbro" style={{ backgroundColor: "#CACBCE" }}>
         <p>
-          <strong>{user.date}</strong>
+          {/* <strong>{user.date}</strong> */}
         </p>
         <p>
           <strong>{user.email}</strong>
@@ -36,7 +25,7 @@ export default function LogComp({ user }) {
           <strong>{user.organization}</strong>
         </p>
         <p>
-          <strong>{user.nodal_permit}</strong>
+          {/* <strong>{user.nodal_permit}</strong> */}
         </p>
         <p>
           <strong>{user.status}</strong>
@@ -56,11 +45,14 @@ export default function LogComp({ user }) {
               : "rgb(209, 209, 248)",
         }}
       >
-        <p>{user.date}</p>
         <p>{user.email}</p>
         <p>{user.organization}</p>
-        <p>{user.nodal_permit}</p>
-        <NodalDropdown status={status} setStatus={setStatus} />
+        {/* <p>{user.nodal_permit}</p> */}
+        <NodalDropdown 
+        setwait = {setwait}
+        email = {user.email}
+        status={status}
+        setStatus={setStatus} />
       </div>
     );
   }

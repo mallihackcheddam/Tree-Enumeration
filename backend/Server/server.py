@@ -120,7 +120,7 @@ async def agency(agent: UserAgent, response : Response):
 async def login(login_body: Login, response : Response):
     
     print(login_body)
-    collection_name = db["UserAgency"]
+    collection_name = db[login_body.role]
 
     # print(login_body)
     body = {
@@ -132,7 +132,7 @@ async def login(login_body: Login, response : Response):
     result = collection_name.find(body)
     l = []
     for i in result:
-        # print(i)
+        print(i)
         l.append(i["email"])
 
     try:
@@ -181,6 +181,26 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
     collection_name.update_one({"email":email}, {"$set":user})
 
     return res
+@app.get("/pending_users")
+async def pending():
+
+    collection_name = db["UserAgency"]
+    user = collection_name.find()
+    
+    l = []
+    for i in user:
+        temp = {
+
+            "email" : i["email"],
+            "organization" : i["organization"],
+            "status":i["status"],
+        }
+
+        l.append(temp)
+
+    return l
+
+
 
 @app.post("/nodal_status")
 async def status(status_body: Status_cls):
@@ -200,7 +220,7 @@ async def status(status_body: Status_cls):
         l_nodal.append(i)
     
     # print(l_nodal)
-    l_nodal[0]['status'] = status_body.status + "-" + status_body.nodal_name
+    l_nodal[0]['status'] = status_body.status
     print(l_nodal[0])
 
     collection_name.update_one({"email":status_body.user_email}, {"$set":l_nodal[0]})
