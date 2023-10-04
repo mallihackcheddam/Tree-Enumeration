@@ -2,7 +2,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export default function navbar() {
+export default function navbar({email}) {
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -17,7 +17,7 @@ export default function navbar() {
           <Link to="/user/home"><a class="nav-link active" aria-current="page" href="/">Home</a></Link>
         </li>
         <li class="nav-item c1">
-          <Link to="/user/upload"><a class="nav-link" href="/">Upload</a></Link>
+          <Link state={{ email :  email}} to="/user/upload"><a class="nav-link" href="/">Upload</a></Link>
         </li>
         <li class="nav-item c1">
           <Link to="/user/analytics"><a class="nav-link" href="/">Analytics</a></Link>
