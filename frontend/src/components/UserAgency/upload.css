@@ -5,8 +5,10 @@
 }
 
 .totalmap{
+    /* background-color: aqua; */
     display: flex;
-    justify-content: center;
+    justify-content:space-around;
+    width: 90%;
     align-items: center;
 }
 
