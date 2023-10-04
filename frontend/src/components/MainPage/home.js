@@ -28,7 +28,12 @@ export default function Home() {
     };
     axios
       .post("/login", requestOptions)
-      .then(() => {
+      .then((resp) => {
+        if(resp.data.status === "Rejected" || resp.data.status === "Pending")
+        {
+            alert("Your Approval Status : " + resp.data.status);
+            return;
+        }
         if (role === "UserAgency") {
           navigate("/user/home", {
             state: {

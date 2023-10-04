@@ -133,11 +133,17 @@ async def login(login_body: Login, response : Response):
     l = []
     for i in result:
         print(i)
-        l.append(i["email"])
+        obj = {
+            "email":i["email"],
+            "status":i["status"],
+        }
+        l.append(
+            obj
+            )
 
     try:
         response.status_code = 200
-        return str(l[0])
+        return l[0]
 
     except:
         response.status_code = 401
