@@ -12,7 +12,22 @@ export default function LogComp({ user, wait, setwait }) {
 
 
 
-  if (user.edhokati === "bold") {
+    // useEffect(()=>{
+    //   const requestOptions = {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ 
+    //       nodal_email : loc.email,
+    //       user_email : user.email,
+    //       status : status
+    //     })
+    //   }
+    //   fetch("http://127.0.0.1:8000/upload", requestOptions)
+    //     .then((data) => data.json())
+    //     .then((data) => console.log(data))
+    // })
+
+  if(user.edhokati==="bold"){
     return (
       <div className="listbro" style={{ backgroundColor: "#CACBCE" }}>
         <p>
