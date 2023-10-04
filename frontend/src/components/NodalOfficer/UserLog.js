@@ -22,7 +22,7 @@ export default function UserLog() {
     "date": "Date",
     "email": "Email",
     "organization": "Organization",
-    "nodal_permit": "ID",
+    "nodal_id": "ID",
     "status": "Status",
     "edhokati": "bold"
   };

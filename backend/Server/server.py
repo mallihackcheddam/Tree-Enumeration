@@ -180,6 +180,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
 
     collection_name.update_one({"email":email}, {"$set":user})
 
+    print(res)
     return res
 @app.get("/pending_users")
 async def pending():
@@ -194,6 +195,7 @@ async def pending():
             "email" : i["email"],
             "organization" : i["organization"],
             "status":i["status"],
+            "nodal_id":i["nodal_id"],
         }
 
         l.append(temp)

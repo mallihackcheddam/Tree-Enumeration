@@ -9,5 +9,9 @@
 }
 
 .listbro p{
-    margin:2%;
+    margin:20px;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* background-color: aqua; */
 }

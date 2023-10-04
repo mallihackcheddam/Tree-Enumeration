@@ -16,16 +16,13 @@ export default function LogComp({ user, wait, setwait }) {
     return (
       <div className="listbro" style={{ backgroundColor: "#CACBCE" }}>
         <p>
-          {/* <strong>{user.date}</strong> */}
-        </p>
-        <p>
           <strong>{user.email}</strong>
         </p>
         <p>
           <strong>{user.organization}</strong>
         </p>
         <p>
-          {/* <strong>{user.nodal_permit}</strong> */}
+          <strong>{user.nodal_id}</strong>
         </p>
         <p>
           <strong>{user.status}</strong>
@@ -35,6 +32,7 @@ export default function LogComp({ user, wait, setwait }) {
   } else {
     return (
       <div
+
         className="listbro"
         style={{
           backgroundColor:
@@ -47,7 +45,7 @@ export default function LogComp({ user, wait, setwait }) {
       >
         <p>{user.email}</p>
         <p>{user.organization}</p>
-        {/* <p>{user.nodal_permit}</p> */}
+        <p>{user.nodal_id}</p>
         <NodalDropdown 
         setwait = {setwait}
         email = {user.email}
