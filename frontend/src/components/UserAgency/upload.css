@@ -1,4 +1,18 @@
 .uploadFile{
+    
     width:30vw;
     background-color: black;
+}
+
+.totalmap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.totall{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
 }
