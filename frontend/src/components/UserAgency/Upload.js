@@ -5,6 +5,7 @@ import MapLocate from '../Government/MapLocate'
 import { useLocation } from 'react-router-dom'
 import upload from '../../pics/upload.png'
 import Log3Comp from './Log3Comp'
+import AltUpload from './ConvUpload.js'
 
 
 function Upload() {
@@ -45,16 +46,18 @@ function Upload() {
             <div className="totall">
                 <div className="mb-3 totalmap">
                     <div className="leftmap">
-                        <input
+                        {/* <input
                             onChange={(e) => {
                                 setfile(e.target.files[0]);
                                 setImg(e.target.files[0]);
                             }}
-                            className="" type="file" id="formFile" accept='.jpeg, .png, .jpg' />
+                            className="" type="file" id="formFile" accept='.jpeg, .png, .jpg' /> */}
+                        <AltUpload/>
                     </div>
 
                     <div className="rightmap">
-                        <div>Select Location : {location}</div>
+                        <h2>Location</h2>
+                        <div>{location}</div>
                         <MapLocate setlocation={setlocation} />
 
                     </div>
@@ -65,6 +68,7 @@ function Upload() {
                     className='btn btn-primary'>
                     Submit
                 </button>
+                <p>------------------------------------------------------------------------</p>
                 <div className="results">
                     <h1>Results</h1>
                     <p>Total count : {count}</p>
