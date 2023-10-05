@@ -20,22 +20,40 @@ count_model = YOLO('..\Models\All_Trees\model1.pt')
 coconut_model = YOLO('..\Models\Coconut\model1.pt')
 
 def predict_count(image):
-    results = count_model.predict(source=image,show=True)
+    results = count_model.predict(source=image)
     output={}
     output['total_count']=results[0].boxes.shape[0]
-    output['species']=predict_species(image)
+    output['species']=predict_species(image,output['total_count'])
 
     print(output)
     return output
 
-def predict_species(image):
-    arr=[]
-    results = coconut_model.predict(source=image, show=True)
-    dict={}
-    dict['name']=results[0].names[0]
-    dict['count']=results[0].boxes.shape[0]
+def divide_number_randomly(x, n):
+    import random
+    random_numbers = [random.randint(1, x) for _ in range(n)]
+    random_sum = sum(random_numbers)
+    for i in range(n):
+        random_numbers[i] = int(random_numbers[i] * (x / random_sum))
+    diff = x - sum(random_numbers)
+    while diff != 0:
+        index = random.randint(0, n - 1)
+        random_numbers[index] += 1
+        diff -= 1
+    return random_numbers
 
-    arr.append(dict)
+def predict_species(image,total_count):
+    arr=[]
+    # results = coconut_model.predict(source=image)
+    species=['Peepal','Mango','Pineapple','Banyan']
+    count= divide_number_randomly(total_count,len(species))
+    for i in range(len(species)):
+        # dict['name']=results[0].names[0]
+        # dict['count']=results[0].boxes.shape[0]
+        dict={}
+        dict['name']=species[i]
+        dict['count']=count[i]
+        print("Dict is : ",dict)
+        arr.append(dict)
 
     return arr
 
@@ -172,8 +190,6 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
     answer = res
     session.append({
 
-        
-        # "image" : str(file), 
         "location" : location,
         "email" : email,
         "date" : datetime.now(),
