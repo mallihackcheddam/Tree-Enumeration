@@ -15,7 +15,6 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.hackathon
 
-
 count_model = YOLO('..\Models\All_Trees\model1.pt')
 coconut_model = YOLO('..\Models\Coconut\model1.pt')
 
@@ -59,8 +58,6 @@ def predict_species(image,total_count):
 
 app = FastAPI()
 origins = [
-    # "http://localhost.tiangolo.com",
-    # "https://localhost.tiangolo.com",
     "http://localhost",
     "http://localhost:3001",
 ]
@@ -72,6 +69,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+class AnalyticsBody(BaseModel):
+    email : str
 
 class ImageBody(BaseModel):
     file: bytes
@@ -252,3 +253,21 @@ async def status(status_body: Status_cls):
     return "Success"
 
 
+@app.post("/analytics")
+async def analytics(Body : AnalyticsBody):
+
+    collection_name = db["UserAgency"]
+    
+    res = collection_name.find({"email":Body.email})
+    for i in res:
+        resp = []
+        for j in i["sessions"][len(i["sessions"])-1]["results"]["species"]:
+            dt = {
+                "name":j["name"],
+                "value":j["count"]
+            }
+            resp.append(dt)
+
+        return resp
+
+    return "Failed"

@@ -14,10 +14,11 @@ function Upload() {
   const [location, setlocation] = useState("");
   const [img, setImg] = useState({ upload });
   const [count, setCount] = useState(0);
-  const { state } = useLocation();
   const [response, setResponse] = useState(null);
 
+  const { state } = useLocation();
   const { email } = state;
+  
   const handleSubmit = () => {
     const formData = new FormData();
     //user email is in loc.email

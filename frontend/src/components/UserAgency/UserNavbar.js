@@ -3,6 +3,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export default function navbar({email}) {
+  console.log("unn"+email)
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,7 +21,7 @@ export default function navbar({email}) {
           <Link state={{ email :  email}} to="/user/upload"><a class="nav-link" href="/">Upload</a></Link>
         </li>
         <li class="nav-item c1">
-          <Link to="/user/analytics"><a class="nav-link" href="/">Analytics</a></Link>
+          <Link state={{ email :  email}} to="/user/analytics"><a class="nav-link" href="/">Analytics</a></Link>
         </li>
         <li class="nav-item c1">
           <Link to="/"><a class="nav-link" href="/">Logout</a></Link>

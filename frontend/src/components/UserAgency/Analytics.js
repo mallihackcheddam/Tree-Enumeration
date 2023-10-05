@@ -5,13 +5,9 @@ import { PieChart, Pie, Cell, Legend } from 'recharts';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend as BarLegend } from 'recharts';
 import './analytics.css'; 
 import 'leaflet/dist/leaflet.css';
-
-const dataPie = [
-  { name: 'Coconut', value: 400 },
-  { name: 'Palm', value: 300 },
-  { name: 'Lemon', value: 300 },
-  { name: 'Gurjan', value: 200 },
-];
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -173,7 +169,33 @@ const MapWithSearch = () => {
   );
 };
 
-const App = () => (
+const App = () => 
+{
+
+  const [response, setresponse] = useState();
+  const [loading, setloading] = useState(true);
+  const { state } = useLocation();
+  const { email } = state;
+
+
+  useEffect(() => {
+    
+    axios.post('/analytics',{
+      email:email,
+    })
+    .then((resp) => {
+      setresponse(resp.data);
+      console.log(resp.data);
+      setloading(false);
+    })
+    .catch()
+
+  }, [email])
+  
+
+  if(!loading)
+  {
+  return(
   <div className="app-container">
     <div className="chart-container">
       <div className="chart">
@@ -183,7 +205,7 @@ const App = () => (
           </text>
           <Pie
             dataKey="value"
-            data={dataPie}
+            data={response}
             cx="50%"
             cy="50%"
             innerRadius={70}
@@ -191,7 +213,7 @@ const App = () => (
             fill="#8884d8"
             label={renderCustomizedLabel}
           >
-            {dataPie.map((entry, index) => (
+            {response.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
@@ -209,6 +231,11 @@ const App = () => (
     </div>
     <MapWithSearch />
   </div>
-);
+)
+}
 
+    return(
+      <><h6>Loading..</h6></>
+    )
+}
 export default App;
