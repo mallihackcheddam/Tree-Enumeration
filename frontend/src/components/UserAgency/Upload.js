@@ -5,6 +5,7 @@ import MapLocate from '../Government/MapLocate'
 import { useLocation } from 'react-router-dom'
 import upload from '../../pics/upload.png'
 import Log3Comp from './Log3Comp'
+import axios from 'axios';
 import AltUpload from './ConvUpload.js'
 
 
@@ -14,31 +15,19 @@ function Upload() {
     const [location, setlocation] = useState("");
     const [img, setImg] = useState({ upload });
     const [count,setCount]= useState(0);
+    const {state}  = useLocation();
+  
+  const {email} = state;
+  const handleSubmit = () => {
+    const formData = new FormData();
     //user email is in loc.email
 
-    const databro = {'total_count': 76, 'species': [{'name': 'Coconut', 'count': 100}]};
+    formData.append("file", file, file.name);
+    formData.append("location", location);
+    formData.append("email", email);
 
-    const handleSubmit = () => {
-
-        const formData = new FormData();
-        setCount(databro.total_count);
-
-        // formData.append("file", file, file.name)
-
-        // const requestOptions = {
-
-        //     method: "post",
-        //     body: formData,
-        // }
-        // fetch("http://127.0.0.1:8000/upload", requestOptions)
-        //     .then((data) => data.json())
-        //     .then((data) => console.log(data))
-
-    }
-
-    function resultChange(){
-        
-    }
+    axios.post("/upload", formData).then((data) => console.log(data));
+  };
 
     return (
         <div className="govtupload">
@@ -76,6 +65,6 @@ function Upload() {
             </div>
         </div>
     )
-}
-
-export default Upload;
+  }
+  export default Upload;
+  

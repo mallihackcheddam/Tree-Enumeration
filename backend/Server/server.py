@@ -30,7 +30,7 @@ def predict_count(image):
 
 def predict_species(image):
     arr=[]
-    results = coconut_model.predict(source=image)
+    results = coconut_model.predict(source=image, show=True)
     dict={}
     dict['name']=results[0].names[0]
     dict['count']=results[0].boxes.shape[0]
@@ -43,8 +43,8 @@ app = FastAPI()
 origins = [
     # "http://localhost.tiangolo.com",
     # "https://localhost.tiangolo.com",
-    # "http://localhost",
-    "http://localhost:3000",
+    "http://localhost",
+    "http://localhost:3001",
 ]
 
 app.add_middleware(
@@ -73,6 +73,7 @@ class Login(BaseModel):
     email: str
     password: str
     role: str
+    # organization: str
     # sessions:list
 
 class Upload(BaseModel):
@@ -89,7 +90,7 @@ async def root():
     return "Mallihackcheddam"
 
 @app.post("/useragency_signup")
-async def agency(agent: UserAgent):
+async def agency(agent: UserAgent, response : Response):
 
     try:
 
@@ -106,29 +107,41 @@ async def agency(agent: UserAgent):
         }
         result = collection_name.insert_one(useragent)
         
+        response.status_code = 200
         return "Success"
 
     except:
+        
+        response.status_code = 401
         return "Failed"
 
 
-@app.get("/login")
+@app.post("/login")
 async def login(login_body: Login, response : Response):
-    collection_name = db[login_body.role]
+    
+    print(login_body)
+    collection_name = db["UserAgency"]
 
+    # print(login_body)
     body = {
+        # "organization" : login_body.organization,
         "email" : login_body.email,
         "password" : login_body.password,
     }
 
     result = collection_name.find(body)
-    
+    l = []
+    for i in result:
+        # print(i)
+        l.append(i["email"])
+
     try:
         response.status_code = 200
-        return str(result[0])
+        return str(l[0])
 
     except:
-        response.status_code = 404
+        response.status_code = 401
+        print("Failed")
         return "Failed"
 
 @app.post("/upload")
@@ -165,7 +178,7 @@ async def upload(file: bytes = File(...), location: str = Form(...), email:str =
 
     print(user)
 
-    # collection_name.update_one({"email":email}, {"$set":user})
+    collection_name.update_one({"email":email}, {"$set":user})
 
     return res
 
@@ -190,6 +203,8 @@ async def status(status_body: Status_cls):
     l_nodal[0]['status'] = status_body.status + "-" + status_body.nodal_name
     print(l_nodal[0])
 
-    collection_name.update_one({"email":email}, {"$set":l_nodal[0]})
+    collection_name.update_one({"email":status_body.user_email}, {"$set":l_nodal[0]})
 
     return "Success"
+
+
