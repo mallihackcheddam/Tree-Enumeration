@@ -12,13 +12,13 @@ function Upload() {
 
   const [file, setfile] = useState(null);
   const [location, setlocation] = useState("");
-  const [img, setImg] = useState({ upload });
+  const [img, setImg] = useState();
   const [count, setCount] = useState(0);
   const [response, setResponse] = useState(null);
 
   const { state } = useLocation();
   const { email } = state;
-  
+
   const handleSubmit = () => {
     const formData = new FormData();
     //user email is in loc.email
@@ -39,12 +39,11 @@ function Upload() {
       <div className="totall">
         <div className="mb-3 totalmap">
           <div className="leftmap">
-            <input
-              onChange={(e) => {
-                setfile(e.target.files[0]);
-                setImg(e.target.files[0]);
-              }}
-              className="" type="file" id="formFile" accept='.jpeg, .png, .jpg' />
+            <div className="imageUploadBox">
+              <h2>Select Image</h2>
+              <input type="file" onChange={handleChange} id="formFile" accept='.jpeg, .png, .jpg' />
+              <img height={"300vh"} width={"300vw"} src={img} />
+            </div>
           </div>
 
           <div style={{
@@ -71,7 +70,7 @@ function Upload() {
           Submit
         </button>
         <div className="results">
-          <h1>{response?"Results":""}</h1>
+          <h1>{response ? "Results" : ""}</h1>
         </div>
         <div
           style={{
@@ -86,7 +85,7 @@ function Upload() {
                   backgroundColor:"black",
                 }}
                 ></div> */}
-          <div>{response?<div className='tablebro'><div>Name</div><div>Count</div></div>:<div></div>}</div>
+          <div>{response ? <div className='tablebro'><div>Name</div><div>Count</div></div> : <div></div>}</div>
           {response ?
             response.species.map((val) => {
               return <>
@@ -97,9 +96,9 @@ function Upload() {
               </>
             })
             : <></>}
-            {response?<p>Total count : {response ? response.total_count : 0}</p>:<></>}
+          {response ? <p>Total count : {response ? response.total_count : 0}</p> : <></>}
         </div>
-        
+
       </div>
     </div>
   )
