@@ -85,14 +85,15 @@ function Upload() {
                   backgroundColor:"black",
                 }}
                 ></div> */}
-          <div>{response ? <div className='tablebro'><div>Name</div><div>Count</div></div> : <div></div>}</div>
+                <table className='table'></table>
+          <div>{response ? <thead><th>Name</th><th>Count</th></thead> : <></>}</div>
           {response ?
             response.species.map((val) => {
               return <>
-                <div className='tablebro'>
-                  <div>{val.name}</div>
-                  <div>{val.count}</div>
-                </div>
+                <tr>
+                  <td>{val.name}</td>
+                  <td>{val.count}</td>
+                </tr>
               </>
             })
             : <></>}
