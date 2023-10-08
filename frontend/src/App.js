@@ -11,8 +11,14 @@ import UserAnalytics from "./components/UserAgency/UserAnalytics";
 import UserHome from "./components/UserAgency/UserHome";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createContext, useContext, useState } from "react";
+export const UserContext = createContext();
+
+
 
 function App() {
+
+  const [email, setEmail] = useState('');
   return (
     <div className="App">
       {/* <Home/> */}
@@ -20,6 +26,7 @@ function App() {
       {/* <Upload/> */}
       {/* <AnalyticsMain/>   */}
       <BrowserRouter>
+      <UserContext.Provider value = {{email, setEmail}}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/userregister" element={<UserRegister />} />
@@ -32,6 +39,7 @@ function App() {
           <Route path="/user/analytics" element={<UserAnalytics />} />
           <Route path="/nodal/usercheck" element={<UserLog />} />
         </Routes>
+      </UserContext.Provider>
       </BrowserRouter>
     </div>
   );

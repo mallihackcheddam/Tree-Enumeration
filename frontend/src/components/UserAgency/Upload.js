@@ -6,7 +6,8 @@ import { useLocation } from 'react-router-dom'
 import upload from '../../pics/upload.png'
 import Log3Comp from './Log3Comp'
 import axios from 'axios';
-
+import { UserContext } from '../../App'
+import { useContext } from 'react'
 
 function Upload() {
 
@@ -16,14 +17,23 @@ function Upload() {
   const [count, setCount] = useState(0);
   const [response, setResponse] = useState(null);
 
-  const { state } = useLocation();
-  const { email } = state;
+  function handleChange(e) {
+    console.log(e.target.files);
+    setfile(e.target.files[0]);
+    setImg(URL.createObjectURL(e.target.files[0]));
+  }
+
+  const {email} = useContext(UserContext);
 
   const handleSubmit = () => {
     const formData = new FormData();
     //user email is in loc.email
 
-    if (location === "") alert("Please choose a location");
+    if (location === "" || file===null )
+    {
+      alert("Please choose a location / file");
+      return;
+    }
     formData.append("file", file, file.name);
     formData.append("location", location);
     formData.append("email", email);

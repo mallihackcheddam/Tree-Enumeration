@@ -7,10 +7,13 @@ import Dropdown from "./Dropdown.js";
 import { useState } from "react";
 import axios from "axios";
 import { containsNumber } from "@turf/turf";
+import { UserContext } from "../../App";
+import { useContext } from "react";
 
 export default function Home() {
+
+  const {email, setEmail} = useContext(UserContext);
   const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 

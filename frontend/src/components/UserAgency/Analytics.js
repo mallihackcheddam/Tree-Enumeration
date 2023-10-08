@@ -8,6 +8,8 @@ import 'leaflet/dist/leaflet.css';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { UserContext } from '../../App';
+import { useContext } from 'react';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -172,11 +174,12 @@ const MapWithSearch = () => {
 const App = () => 
 {
 
+
+
   const [response, setresponse] = useState();
   const [loading, setloading] = useState(true);
-  const { state } = useLocation();
-  const { email } = state;
-
+  
+  const {email} = useContext(UserContext);
 
   useEffect(() => {
     

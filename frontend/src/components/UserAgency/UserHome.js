@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import UserNavbar from './UserNavbar'
 import { useLocation } from 'react-router-dom';
+import { UserContext } from '../../App';
+import { useContext } from 'react';
 
 export default function GovtHome() {
 
-  const { state } = useLocation();
-  const [email, setemail] = useState(state.email)
 
+  const {email} = useContext(UserContext);
   // console.log(state);
 
   return (
