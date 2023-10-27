@@ -1,0 +1,20 @@
+.govhome{
+    height:90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.govbuttons{
+    margin:1%;
+    width:50vw;
+    display: flex;
+    justify-content: center;
+}
+
+.govbuttons *{
+    margin:2%;
+    padding:1%;
+    background-color: #CBEFB6;
+}
